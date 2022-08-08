@@ -58,6 +58,44 @@ func SumColomns(matrix [][]int) []int {
 	return rows
 }
 
+// 4. Найти строку матрицы с максимальной суммой элементов
+func FindMaxRow(matrix [][]int) (max_sum int, row_num int) {
+	max_sum = -1 << 31
+	row_num = -1
+	row_sum := 0
+	for i := 0; i < len(matrix); i++ {
+		row_sum = 0
+		for j := 0; j < len(matrix[i]); j++ {
+			row_sum += matrix[i][j]
+		}
+		if row_sum >= max_sum {
+			max_sum = row_sum
+			row_num = i
+		}
+	}
+	return
+}
+
+// 5. Найти индексы максимальных элементов матрицы
+func FindMaxElementsIndex(matrix [][]int) {
+	max_element := -1 << 31
+	for i := 0; i < len(matrix); i++ {
+		for j := 0; j < len(matrix[i]); j++ {
+			if matrix[i][j] > max_element {
+				max_element = matrix[i][j]
+			}
+		}
+	}
+
+	for i := 0; i < len(matrix); i++ {
+		for j := 0; j < len(matrix[i]); j++ {
+			if matrix[i][j] == max_element {
+				fmt.Println("[", i, "][", j, "]")
+			}
+		}
+	}
+}
+
 func main() {
 	rand.Seed(time.Now().UnixNano())
 
@@ -79,7 +117,9 @@ func main() {
 	}
 
 	// Output:
-	fmt.Println(SumMatrix(matrix))
-	fmt.Println(SumRows(matrix))
-	fmt.Println(SumColomns(matrix))
+	//fmt.Println(SumMatrix(matrix))
+	//fmt.Println(SumRows(matrix))
+	//fmt.Println(SumColomns(matrix))
+	//fmt.Println(FindMaxRow(matrix))
+	FindMaxElementsIndex(matrix) // Own output inside function
 }
